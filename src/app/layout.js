@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import toast, { Toaster } from "react-hot-toast";
 import "./globals.css";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/footer.jsx";
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>
