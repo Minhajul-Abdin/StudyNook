@@ -12,6 +12,9 @@ export default function RoomCard({ room }) {
     hourly_rate,
     amenities,
   } = room;
+
+  const restCount = amenities.length - 3;
+
   return (
     <div className="w-full max-w-sm bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
       {/* Image */}
@@ -22,7 +25,7 @@ export default function RoomCard({ room }) {
             "https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
           }
           alt={room_name}
-          className="h-48 w-full object-cover"
+          className="h-48 w-full object-fill"
         />
 
         <span className="absolute top-3 right-3 bg-black/70 text-white text-xl px-3 py-1 rounded-full">
@@ -49,7 +52,7 @@ export default function RoomCard({ room }) {
         </div>
 
         <div className="flex flex-wrap gap-2 pt-2">
-          {amenities.map((item, i) => (
+          {amenities.slice(0, 3).map((item, i) => (
             <span
               key={i}
               className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
@@ -57,6 +60,7 @@ export default function RoomCard({ room }) {
               {item}
             </span>
           ))}
+          + {restCount} More
         </div>
         <Link href={`/rooms/${_id}`}>
           <button className="w-full mt-2 bg-gray-900 text-white py-2 rounded-xl text-sm font-medium hover:bg-gray-800 transition">
