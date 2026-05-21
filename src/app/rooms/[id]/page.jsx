@@ -1,7 +1,8 @@
 import React from "react";
-import { Layers, Users, Clock, Calendar, CheckCircle2 } from "lucide-react";
+import { Layers, Users, Clock, CheckCircle2 } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import BookButton from "@/components/bookBtn";
 
 const fetchSingleRoom = async (id, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms/${id}`, {
@@ -22,6 +23,7 @@ export default async function StudyNookDetail({ params }) {
   const {
     _id,
     room_name,
+    bookCount,
     short_description,
     room_image_url,
     floor,
@@ -39,7 +41,7 @@ export default async function StudyNookDetail({ params }) {
           </h1>
           <span className="inline-flex items-center gap-1 bg-[#E2ECE4] text-[#4A6B53] text-xs font-medium px-2.5 py-1 rounded-full border border-[#D0DFD3]">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            {hourly_rate} bookings
+            {bookCount || "0"} bookings
           </span>
         </div>
 
@@ -118,10 +120,7 @@ export default async function StudyNookDetail({ params }) {
               </div>
 
               {/* Action Button */}
-              <button className="w-full mt-6 bg-[#D4A351] hover:bg-[#C09243] text-white font-medium py-3 px-4 rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm md:text-base">
-                <Calendar className="w-4 h-4" />
-                Book Now
-              </button>
+              <BookButton room={room} />
             </div>
           </div>
         </div>
