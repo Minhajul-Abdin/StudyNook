@@ -39,6 +39,45 @@ const Navbar = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
+              {!isPending && !session ? (
+                <>
+                  {" "}
+                  <li>
+                    <Link href={"/"}>Home</Link>
+                  </li>
+                  <li>
+                    <Link href={"/rooms"}>Rooms</Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link href={"/"}>Home</Link>
+                  </li>
+                  <li>
+                    <Link href={"/rooms"}>Rooms</Link>
+                  </li>
+                  <li>
+                    <Link href={"/addRoom"}>Add Room</Link>
+                  </li>
+                  <li>
+                    <Link href={"/myListings"}>My Listings</Link>
+                  </li>
+                  <li>
+                    <Link href={"/myBookings"}>My Bookings</Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+          <a className="md:px-3 font-bold text-2xl">
+            Study<i>Nook</i>
+          </a>
+        </div>
+
+        {!isPending && !session ? (
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">
               <li>
                 <Link href={"/"}>Home</Link>
               </li>
@@ -47,20 +86,28 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className="md:px-3 font-bold text-2xl">
-            Study<i>Nook</i>
-          </a>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link href={"/"}>Home</Link>
-            </li>
-            <li>
-              <Link href={"/rooms"}>Rooms</Link>
-            </li>
-          </ul>
-        </div>
+        ) : (
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">
+              <li>
+                <Link href={"/"}>Home</Link>
+              </li>
+              <li>
+                <Link href={"/rooms"}>Rooms</Link>
+              </li>
+              <li>
+                <Link href={"/addRoom"}>Add Room</Link>
+              </li>
+              <li>
+                <Link href={"/myListings"}>My Listings</Link>
+              </li>
+              <li>
+                <Link href={"/myBookings"}>My Bookings</Link>
+              </li>
+            </ul>
+          </div>
+        )}
+
         {!isPending && !session ? (
           <div className="navbar-end">
             <ul className="menu menu-horizontal px-1 flex justify-end gap-2">

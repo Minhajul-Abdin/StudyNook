@@ -1,15 +1,24 @@
 import React from "react";
 import { Layers, Users, Clock, Calendar, CheckCircle2 } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-const fetchSingleRoom = async (id) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms/${id}`);
+const fetchSingleRoom = async (id, token) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}` || "",
+    },
+  });
   const data = await res.json();
   return data || {};
 };
 
 export default async function StudyNookDetail({ params }) {
   const { id } = await params;
-  const room = await fetchSingleRoom(id);
+  const { token } = await auth.api.getToken({
+    headers: await headers(), // headers containing the user's session token
+  });
+  const room = await fetchSingleRoom(id, token);
   const {
     _id,
     room_name,
